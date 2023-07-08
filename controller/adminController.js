@@ -82,7 +82,7 @@ const loginAdmin = async (req, res) => {
     if (!adminExists) {
       res
         .status(404)
-        .json({status: 0,msg: "you are not registered alumni. please Register."});
+        .json({status: 0,msg: "you are not registered admin. please Register."});
       return;
     }
     let token = generateToken(adminExists._id);

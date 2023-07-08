@@ -16,7 +16,8 @@ app.use(cookieParser());
 // Routes
 const questionsRouter=require('./routes/questionsRoute');
 const adminRouter=require('./routes/adminRoute');
-
+const resultRouter=require('./routes/resultRoute');
+const userRouter=require('./routes/userRoute');
 
 //Routes Middleware
 app.get('/',(req,res)=>{
@@ -24,6 +25,8 @@ app.get('/',(req,res)=>{
 });
 app.use("/question",questionsRouter);
 app.use("/admin",adminRouter);
+app.use("/result",resultRouter);
+app.use("/user",userRouter);
 
 
 
