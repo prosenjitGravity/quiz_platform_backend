@@ -22,6 +22,31 @@ const getQuestionForUser=async(req,res)=>{
     }
 };
 
+const getResult=async (req,res)=>{
+    try{
+        console.log(req.body);
+        let question = await Questions.find();
+        let answeredQuestions = req.body.answers;
+        let correctAnswer = 0;
+        let wrongAnswer = 0;
+        answeredQuestions.map( answer =>{
+            question.map( que => {
+                if(que.question == answer.question){
+                    if(que.answer.includes(answer.answer)){
+                        correctAnswer = correctAnswer + 1;
+                    } else {
+                        wrongAnswer = wrongAnswer + 1;
+                    }
+                }
+            })
+        })
+        res.status(200).json({status:1,correctAnswer: correctAnswer, wrongAnswer: wrongAnswer});
+    }catch(error){
+        console.log(error);
+        res.status(400).json({status:0,msg:error});
+    }
+};
+
 const createQuestion=async (req,res)=>{
     try{
         console.log(req.body);
@@ -51,4 +76,4 @@ const deleteQuestion=async(req,res)=>{
         res.status(400).json({status:0,msg:error});
     }
 }
-module.exports={getQuestion,createQuestion,updateQuestions,deleteQuestion ,getQuestionForUser};
+module.exports={getQuestion,createQuestion,updateQuestions,deleteQuestion,getResult ,getQuestionForUser};
